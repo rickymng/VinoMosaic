@@ -1,34 +1,58 @@
 package com.example.testing;
 
-import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 
 public class MainActivity extends Activity {
-
-		private CustomAdapter mAdapter;
 	
-		private ArrayList<String> mItems = new ArrayList<String>();
-	
+		//Main function when program begins
 		@Override
-
 		public void onCreate(Bundle savedInstanceState) {
 	
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_main);
 	
-	
-			for (int i = 0; i<4; i++) {
-			mItems.add(Integer.toString(i));
+			GridView g = (GridView) findViewById(R.id.gridview);
+			g.setAdapter(new MainPageAdapter(this));
+			
+			g.setOnItemClickListener(  new OnItemClickListener () {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					
+					CallSubPage (position);
+				}
+				
+			});
 			}
-	
-		mAdapter = new CustomAdapter(this, mItems);
-		GridView g = (GridView) findViewById(R.id.gridview);
-	
-		g.setAdapter(mAdapter);
-		registerForContextMenu(g);
-	}
+		
+		
+		//Sub function to trigger SubActivity from Main Menu
+		public void CallSubPage (int position) {
+			
+			Intent intent = null;
+			
+			switch (position) {
+			
+			case 0:
+				intent = new Intent (getApplicationContext(), Activity0.class);
+				break;
+			
+			case 1:
+				intent = new Intent (getApplicationContext(), Activity1.class);
+				break;
+				
+			}
+			
+			startActivity(intent);
+		}
+		
+
 }

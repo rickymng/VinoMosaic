@@ -1,6 +1,5 @@
 package com.example.testing;
 
-import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,35 +10,34 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-public class CustomAdapter extends BaseAdapter {
+public class MainPageAdapter extends BaseAdapter {
 	
 	private Context mContext;
-	private ArrayList<String> mItems;
 	
-	public CustomAdapter(Context c, ArrayList<String> items) {
+	public MainPageAdapter(Context c) {
 		mContext = c;
-		mItems = items;
 	}
 	
 	
 	@Override
 	public int getCount() {
-		return mItems.size();
+		return mThumbId.length;
+		
 	}
 
 	
 	@Override
 	public Object getItem(int position) {
-		return mItems.get(position);
+		return null;
 	}
 
 	
 	@Override
 	public long getItemId(int position) {
-		return position;
+		return 0;
 	}
 
+	//Inflate the icons and text
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 	
@@ -51,10 +49,11 @@ public class CustomAdapter extends BaseAdapter {
 			LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = li.inflate(R.layout.grid_item, null);
 		
-			//Placing image and text
+			//Display image
 			ImageView iv = (ImageView)v.findViewById(R.id.grid_item_image);
 			iv.setImageResource(mThumbId[position]);
 			
+			//Display text
 			TextView tv = (TextView)v.findViewById(R.id.grid_item_text);
 			tv.setTextColor(Color.WHITE);
 			tv.setText(mText[position]);
@@ -68,7 +67,7 @@ public class CustomAdapter extends BaseAdapter {
 	private int[] mThumbId = {
 			R.drawable.ic_tab_chardonnay,
 			R.drawable.ic_dialog_chardonnay,
-			R.drawable.ic_action_glossary2,			
+			R.drawable.ic_action_glossary,			
 			R.drawable.ic_tab_chardonnay
 	};
 	
